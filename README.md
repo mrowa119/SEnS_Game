@@ -1,1 +1,1 @@
-Tu bêdzie gra z Codding Dojo
+Tu bêdzie gra z Codding Dojo.
