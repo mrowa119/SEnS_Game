@@ -1,4 +1,7 @@
+import java.awt.AWTException;
 import java.awt.GridLayout;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import org.imgscalr.Scalr;
 
@@ -48,7 +52,6 @@ public class Game {
 		frame.requestFocusInWindow();
 		c.print(board);
 	}
-
 
 	public static void setValue(JLabel label, int value) {
 		switch (value) {
@@ -117,10 +120,11 @@ public class Game {
 		 * for (int i = 0; i < 10; i++) { for (int j = 0; j < 20; j++) {
 		 * System.out.print(worldFirst[i][j]); } System.out.println(); }
 		 */
-		worldFirst[8][5]=1;
-		worldFirst[9][10]=0;
-		worldFirst[5][15]=1;
-		worldFirst[3][10]=1;
+		worldFirst[8][5] = 1;
+		worldFirst[9][10] = 0;
+		worldFirst[5][15] = 1;
+		worldFirst[3][10] = 1;
+		worlds.add(worldFirst);
 		worlds.add(worldFirst);
 
 		return worlds;
@@ -162,7 +166,7 @@ public class Game {
 	}
 
 	public void nextWorld() {
-		if (this.worlds.size() > worldId+1) {
+		if (this.worlds.size() > worldId + 1) {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -171,12 +175,24 @@ public class Game {
 			}
 			fillBoard(board, worlds.get(++worldId));
 			c.newWorld(worlds.get(worldId));
-		} else
+		} else {
+			JOptionPane.showMessageDialog(null, "Wygra³eœ!!! koniec map!!!");
+			c.reset();
+			Robot r;
 			try {
-				throw new Exception("brak swiata");
-			} catch (Exception e) {
+				r = new Robot();
+				r.keyPress(KeyEvent.VK_ESCAPE);
+			} catch (AWTException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} // brak kolejnego swiata
+			}
+			
+			// try {
+			// throw new Exception("brak swiata");
+			// } catch (Exception e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// } // brak kolejnego swiata
+		}
 	}
 }

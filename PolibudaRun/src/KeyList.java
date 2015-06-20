@@ -42,6 +42,7 @@ public class KeyList implements KeyListener, Runnable{
 				frame.setLayout(null);
 				menu.createInterface(frame); 
 				frame.removeKeyListener(this);
+				this.c.reset();
 				break;
 			}
 			case KeyEvent.VK_LEFT: isLeftPressed = true; break;

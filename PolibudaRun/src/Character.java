@@ -21,6 +21,12 @@ public class Character {
 		this.board = board;
 		this.game = game;
 	}
+	
+	public void reset(){
+		x = world.length - 2;
+		y = 0;
+	}
+	
 
 	public void up() {
 		synchronized (board) {
@@ -84,8 +90,7 @@ public class Character {
 		synchronized (board) {
 			remove(board, world);
 			this.world = world;
-			x = world.length - 2;
-			y = 0;
+			reset();
 			print(board);
 		}
 	}
