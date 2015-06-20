@@ -24,7 +24,6 @@ public class Menu implements ActionListener {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Hello World!!! \nTestuje sobie");
 		Menu m = new Menu();
 		m.createInterface(m.createFrame(800, 600));
 	}

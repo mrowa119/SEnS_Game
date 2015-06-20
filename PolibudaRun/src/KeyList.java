@@ -19,7 +19,6 @@ public class KeyList implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Dupa");
 		int c = e.getKeyCode();
 		if (!(this.c == null)) {
 			switch (c) {
