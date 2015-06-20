@@ -1,19 +1,25 @@
-
 public class Character {
-	
-	public void up(){
-		
+	private int X;
+	private int Y;
+
+	public Character(int x, int y) {
+		this.X = x;
+		this.Y = y;
 	}
-	
-	public void down(){
-		
+
+	public void up() {
+		this.Y += 1;
 	}
-	
-	public void left(){
-		
+
+	public void down() {
+		this.Y -= 1;
 	}
-	
-	public void rigth(){
-		
+
+	public void left() {
+		this.X -= 1;
+	}
+
+	public void rigth() {
+		this.X += 1;
 	}
 }
