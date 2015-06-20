@@ -1,3 +1,4 @@
+
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,15 +6,15 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-
 public class Game {
+	//public Game(JFrame frame, Menu menu) {
 
 	private final static int width = 20;
 	private final static int height = 10;
 	private List<int[][]> worlds;
-	private int wolrdId;
+	private int worldId;
 	
-	public static void main(String args[]) {
+/*	public static void main(String args[]) {
 		Game g = new Game();
 		g.loadTestWorlds();
 		
@@ -23,24 +24,44 @@ public class Game {
 		
 		g.makeLabels(frame);
 		
-	}
+	}*/
 
 	public Game() {
 		loadTestWorlds();
 		Character character = new Character(width, height);
+		
 	}
 	public Game(JFrame frame, Menu menu){
 		
 		loadTestWorlds();
-		
+		Character character = new Character(width, height);
+		makeLabels(frame);
 	}
-	
-	public void start(){
-		
+
+	public void start() {
+
 	}
-	
-	public void fillBoard(JLabel[][] board, int[][] world, Character character){
-		
+
+	public void fillBoard(JLabel[][] board, int[][] world, Character character) {
+
+	}
+
+	// czy pole aktualny swiat czy jest ostatnie to error koniec swiata
+	// jesli nie to wczytaj ten swiat metodá fillworld throw exception opis 1
+	// zdanie
+
+	public void CzyJestNastepnySwiat(JLabel[][] etykieta, int[][] world,
+			Character character) {
+		if (this.worlds.size() == worldId) {
+			try {
+				throw new Exception("brak swiata");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} // brak kolejnego swiata
+		}
+		fillBoard(etykieta, world, character);
+		worldId++;
 	}
 	public void loadTestWorlds(){
 		
@@ -72,6 +93,10 @@ public class Game {
 //		int labelHeight = (frameHeight/height);
 //		int labelWidth = (frameWidth/width);
 //		System.out.println(labelHeight + "\n" + labelWidth);
+		
+		// czyszczenie okna
+		frame.getContentPane().removeAll();
+		frame.repaint();
 		
 		GridLayout grid = new GridLayout(10, 20);
 		frame.setLayout(grid);
