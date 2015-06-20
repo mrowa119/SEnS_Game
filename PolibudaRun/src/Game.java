@@ -49,7 +49,7 @@ public class Game {
 		fillBoard(etykieta, world, character);
 		worldId++;
 	}
-	public List loadTestWorlds(){
+	public List<int[][]> loadTestWorlds(){
 		
 		worlds = new ArrayList<int[][]>();
 		int[][] worldFirst = new int[10][20];
