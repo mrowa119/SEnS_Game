@@ -32,7 +32,7 @@ public class Menu implements ActionListener {
 	
 	public JFrame createFrame(int width,int height){
 		
-		frame = new JFrame("Dupa");
+		frame = new JFrame("Polibuda Run");
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
