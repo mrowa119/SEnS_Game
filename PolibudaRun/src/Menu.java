@@ -30,7 +30,7 @@ public class Menu implements ActionListener {
 	
 	public JFrame createFrame(int width,int height){
 		
-		frame = new JFrame("Dupa");
+		frame = new JFrame("Polibuda Run");
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
@@ -55,19 +55,16 @@ public class Menu implements ActionListener {
 		startB.setBorderPainted(false);
 		startB.setFocusPainted(false);
 		startB.setBackground(new Color(46, 204, 113));
-		startB.setBounds(0, 0, 150, 50);
 		startB.setFont(new Font(Font.SANS_SERIF, 2, 30));
 		
 		aboutB.setBorderPainted(false);
 		aboutB.setFocusPainted(false);
 		aboutB.setBackground(new Color(65, 131, 215));
-		aboutB.setBounds(0, 0, 150, 50);
 		aboutB.setFont(new Font(Font.SANS_SERIF, 2, 30));
 		
 		quitB.setBorderPainted(false);
 		quitB.setFocusPainted(false);
 		quitB.setBackground(new Color(210, 77, 87));
-		quitB.setBounds(0, 0, 150, 50);
 		quitB.setFont(new Font(Font.SANS_SERIF, 2, 30));
 		
 		//obsluga zdarzen

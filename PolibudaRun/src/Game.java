@@ -82,7 +82,7 @@ public class Game {
 	
 	private static void setUfo(JLabel label) {
 		// TODO Auto-generated method stub
-		label.setIcon(new ImageIcon(Scalr.resize(ufo, label.getHeight(), label.getWidth())));
+		label.setIcon(new ImageIcon(Scalr.resize(ufo, label.getWidth(), label.getHeight())));
 	}
 
 	public void fillBoard(JLabel[][] board, int[][] world) {

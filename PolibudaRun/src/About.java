@@ -45,7 +45,7 @@ public class About implements ActionListener {
 		// tworzenie pola tekstowego
 		String tekst = 
 				"Ta oto\n politechnczna gierka\npowsta³a w ramach projektu\n\"Juwenaliowe Coding Dojo\"\norganizowanego"
-				+ "przez ko³o nauowe\n\"SEnS\"";
+				+ "przez ko³o naukowe\n\"SEnS\"";
 		
 		StyledDocument document = new DefaultStyledDocument();
 		Style defaultStyle = document.getStyle(StyleContext.DEFAULT_STYLE);
