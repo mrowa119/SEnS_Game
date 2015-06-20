@@ -1,25 +1,33 @@
 public class Character {
-	private int X;
-	private int Y;
+	private int x;
+	private int y;
 
+	
 	public Character(int x, int y) {
-		this.X = x;
-		this.Y = y;
+		this.x = x;
+		this.y = y;
 	}
 
 	public void up() {
-		this.Y += 1;
+		this.y += 1;
 	}
 
 	public void down() {
-		this.Y -= 1;
+		this.y -= 1;
 	}
 
 	public void left() {
-		this.X -= 1;
+		this.x -= 1;
 	}
 
 	public void rigth() {
-		this.X += 1;
+		this.x += 1;
 	}
+
+	@Override
+	public String toString() {
+		return "Character [x=" + x + ", y=" + y + "]";
+	}
+	
+	
 }
