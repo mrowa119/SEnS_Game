@@ -22,7 +22,7 @@ import org.imgscalr.Scalr;
 public class About implements ActionListener {
 	Menu menu = null;
 	JFrame frame = null;
-	JButton b_back = new JButton("< MENU");
+	JButton b_back = null;
 	
 	public void createInterface(JFrame frame, Menu menu) {
 		// ustawianie okna i menu w klasie
@@ -30,14 +30,17 @@ public class About implements ActionListener {
 		this.menu = menu;
 		
 		// czyszczenie okna
+		frame.getContentPane().removeAll();
 		frame.repaint();
 				
 		// tworzenie buttona z powrotem do menu
+		b_back = new JButton("< MENU");
 		b_back.setBorderPainted(false);
 		b_back.setFocusPainted(false);
-		b_back.setBackground(new Color(210, 77, 87));
+		b_back.setBackground(new Color(65, 131, 215));
 		b_back.setBounds(0, 0, 150, 50);
 		b_back.setFont(new Font(Font.SANS_SERIF, 2, 30));
+		b_back.addActionListener(this);
 		
 		// tworzenie pola tekstowego
 		String tekst = 
@@ -81,7 +84,6 @@ public class About implements ActionListener {
 		
 		// organizacja okna		
 		frame.setTitle("O gierce...");
-		frame.getContentPane().setBackground(new Color(174, 168, 211));
 		frame.add(b_back);
 		frame.add(jtp_about);
 		frame.add(jl_infusion);
