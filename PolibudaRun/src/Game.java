@@ -1,9 +1,16 @@
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import org.imgscalr.Scalr;
 
 public class Game {
 	// public Game(JFrame frame, Menu menu) {
@@ -14,6 +21,20 @@ public class Game {
 	private int worldId;
 	private JLabel[][] board;
 	private Character c;
+	private static BufferedImage sky=null;
+	private static BufferedImage down=null;
+	private static BufferedImage ufo=null;
+	
+	static{
+		try {
+			sky = ImageIO.read(new File("../img/bg.png"));
+			down = ImageIO.read(new File("../img/down.png"));
+			ufo = ImageIO.read(new File("../img/ufo.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Game(JFrame frame, Menu menu) {
 
@@ -34,18 +55,34 @@ public class Game {
 	public static void setValue(JLabel label, int value) {
 		switch (value) {
 		case 0: {
-			label.setText("N");
+			setSky(label);
 			break;
 		}
 		case 1: {
-			label.setText("Z");
+			setDown(label);
 			break;
 		}
 		case 3: {
-			label.setText("X");
+			setUfo(label);
 			break;
 		}
 		}
+	}
+
+	private static void setSky(JLabel label) {
+		// TODO Auto-generated method stub
+		//label.setIcon(new ImageIcon(Scalr.resize(sky, label.getHeight(), label.getWidth())));
+		label.setIcon(null);
+	}
+	
+	private static void setDown(JLabel label) {
+		// TODO Auto-generated method stub
+		label.setIcon(new ImageIcon(Scalr.resize(down, label.getHeight(), label.getWidth())));
+	}
+	
+	private static void setUfo(JLabel label) {
+		// TODO Auto-generated method stub
+		label.setIcon(new ImageIcon(Scalr.resize(ufo, label.getHeight(), label.getWidth())));
 	}
 
 	public void fillBoard(JLabel[][] board, int[][] world) {
@@ -121,7 +158,7 @@ public class Game {
 		JLabel arrayOfLabels[][] = new JLabel[10][20];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 20; j++) {
-				arrayOfLabels[i][j] = new JLabel("x");
+				arrayOfLabels[i][j] = new JLabel();
 				frame.add(arrayOfLabels[i][j]);
 
 			}

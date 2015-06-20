@@ -36,6 +36,7 @@ public class Menu implements ActionListener {
 		frame.setLayout(null);
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(new Color(174, 168, 211));
+		frame.setResizable(false);
 		
 		return frame;
 	}

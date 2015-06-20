@@ -28,7 +28,9 @@ public class HorizontalMove implements Runnable  {
 			}
 		}
 		for(int i=0;i<maxJumpHeigth;i++){
-			c.down();
+			synchronized (c) {
+				c.down();
+			}
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -49,7 +51,9 @@ public class HorizontalMove implements Runnable  {
 			}
 		}
 		for(int i=0;i<maxJumpHeigth;i++){
-			c.up();
+			synchronized (c) {
+				c.up();
+			}
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {

@@ -1,5 +1,7 @@
 import javax.swing.JLabel;
 
+import org.imgscalr.Scalr;
+
 public class Character {
 	private int x;
 	private int y;
