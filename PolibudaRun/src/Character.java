@@ -31,7 +31,7 @@ public class Character {
 	public void up() {
 		synchronized (board) {
 			if (x > 0)
-				if (world[x - 1][y] == 0) {
+				if ((world[x - 1][y] == 0) || (world[x - 1][y] == 2)) {
 					remove(board, world);
 					this.x -= 1;
 					print(board);
@@ -59,7 +59,7 @@ public class Character {
 	public void left() {
 		synchronized (board) {
 			if (y > 0)
-				if (world[x][y - 1] == 0) {
+				if ((world[x][y - 1] == 0) || (world[x][y - 1] == 2) ) {
 
 					remove(board, world);
 					this.y -= 1;
@@ -73,7 +73,7 @@ public class Character {
 	public void rigth() {
 		if (y < world[0].length - 1) {
 			synchronized (board) {
-				if (world[x][y + 1] == 0) {
+				if ((world[x][y + 1] == 0) || (world[x][y + 1] == 2)) {
 					remove(board, world);
 					this.y += 1;
 					print(board);

@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 import org.imgscalr.Scalr;
 
@@ -27,11 +28,13 @@ public class Game {
 	private Character c;
 	private static BufferedImage down = null;
 	private static BufferedImage ufo = null;
+	private static BufferedImage rope = null;
 
 	static {
 		try {
 			down = ImageIO.read(new File("../img/down.png"));
 			ufo = ImageIO.read(new File("../img/ufo.png"));
+			rope = ImageIO.read(new File("../img/rope.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,6 +66,10 @@ public class Game {
 			setDown(label);
 			break;
 		}
+		case 2: {
+			setRope(label);
+			break;
+		}
 		case 3: {
 			setUfo(label);
 			break;
@@ -80,6 +87,13 @@ public class Game {
 	private static void setDown(JLabel label) {
 		// TODO Auto-generated method stub
 		label.setIcon(new ImageIcon(Scalr.resize(down, label.getHeight(),
+				label.getWidth())));
+	}
+	
+	private static void setRope(JLabel label) {
+		// TODO Auto-generated method stub
+		label.setVerticalAlignment(SwingConstants.TOP);
+		label.setIcon(new ImageIcon(Scalr.resize(rope, label.getHeight(),
 				label.getWidth())));
 	}
 
@@ -124,6 +138,7 @@ public class Game {
 		worldFirst[9][10] = 0;
 		worldFirst[5][15] = 1;
 		worldFirst[3][10] = 1;
+		worldFirst[6][3] = 2;
 		worlds.add(worldFirst);
 		worlds.add(worldFirst);
 
