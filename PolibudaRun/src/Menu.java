@@ -29,6 +29,8 @@ public class Menu implements ActionListener {
 		frame.setLayout(null);
 		frame.setVisible(true);
 		
+					frame.addKeyListener(new KeyList(new Character(5, 5)));
+		
 		return frame;
 	}
 	
@@ -75,7 +77,6 @@ public class Menu implements ActionListener {
 			a.createInterface(frame, this);
 		}
 		else{
-			
 			frame.dispose();
 		}
 		
