@@ -44,7 +44,9 @@ public class Game {
 		fillBoard(board, worlds.get(0));
 		worldId = 0;
 		c = new Character(0, height - 2, worlds.get(0), board);
-		frame.addKeyListener(new KeyList(c));
+		KeyList kl = new KeyList(c);
+		new Thread(kl).start();
+		frame.addKeyListener(kl);
 		frame.requestFocusInWindow();
 	}
 
