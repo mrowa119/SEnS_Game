@@ -21,13 +21,11 @@ public class Game {
 	private int worldId;
 	private JLabel[][] board;
 	private Character c;
-	private static BufferedImage sky=null;
-	private static BufferedImage down=null;
-	private static BufferedImage ufo=null;
-	
-	static{
+	private static BufferedImage down = null;
+	private static BufferedImage ufo = null;
+
+	static {
 		try {
-			sky = ImageIO.read(new File("../img/bg.png"));
 			down = ImageIO.read(new File("../img/down.png"));
 			ufo = ImageIO.read(new File("../img/ufo.png"));
 		} catch (IOException e) {
@@ -43,16 +41,14 @@ public class Game {
 		board = makeLabels(frame);
 		fillBoard(board, worlds.get(0));
 		worldId = 0;
-		c = new Character(0, height - 2, worlds.get(0), board);
-		KeyList kl = new KeyList(c);
+		c = new Character(0, height - 2, worlds.get(0), board, this);
+		KeyList kl = new KeyList(c, frame, menu);
 		new Thread(kl).start();
 		frame.addKeyListener(kl);
 		frame.requestFocusInWindow();
-	}
-
-	public void start() {
 		c.print(board);
 	}
+
 
 	public static void setValue(JLabel label, int value) {
 		switch (value) {
@@ -73,18 +69,21 @@ public class Game {
 
 	private static void setSky(JLabel label) {
 		// TODO Auto-generated method stub
-		//label.setIcon(new ImageIcon(Scalr.resize(sky, label.getHeight(), label.getWidth())));
+		// label.setIcon(new ImageIcon(Scalr.resize(sky, label.getHeight(),
+		// label.getWidth())));
 		label.setIcon(null);
 	}
-	
+
 	private static void setDown(JLabel label) {
 		// TODO Auto-generated method stub
-		label.setIcon(new ImageIcon(Scalr.resize(down, label.getHeight(), label.getWidth())));
+		label.setIcon(new ImageIcon(Scalr.resize(down, label.getHeight(),
+				label.getWidth())));
 	}
-	
+
 	private static void setUfo(JLabel label) {
 		// TODO Auto-generated method stub
-		label.setIcon(new ImageIcon(Scalr.resize(ufo, label.getWidth(), label.getHeight())));
+		label.setIcon(new ImageIcon(Scalr.resize(ufo, label.getWidth(),
+				label.getHeight())));
 	}
 
 	public void fillBoard(JLabel[][] board, int[][] world) {
@@ -101,39 +100,27 @@ public class Game {
 	// jesli nie to wczytaj ten swiat metodá fillworld throw exception opis 1
 	// zdanie
 
-	public void isNextWorld(JLabel[][] etykieta, int[][] world,
-			Character character) {
-		if (this.worlds.size() == worldId) {
-			try {
-				throw new Exception("brak swiata");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} // brak kolejnego swiata
-		}
-		fillBoard(etykieta, world);
-		worldId++;
-	}
-
 	public List<int[][]> loadTestWorlds() {
 
 		worlds = new ArrayList<int[][]>();
-		int[][] worldFirst = new int[10][20];
+		int[][] worldFirst = new int[height][width];
 
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 20; j++) {
+		for (int i = 0; i < height - 1; i++) {
+			for (int j = 0; j < width; j++) {
 				worldFirst[i][j] = 0;
 			}
 		}
-		for (int i = 0; i < 20; i++) {
-			worldFirst[9][i] = 1;
+		for (int i = 0; i < width; i++) {
+			worldFirst[height - 1][i] = 1;
 		}
-/*		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 20; j++) {
-				System.out.print(worldFirst[i][j]);
-			}
-			System.out.println();
-		}*/
+		/*
+		 * for (int i = 0; i < 10; i++) { for (int j = 0; j < 20; j++) {
+		 * System.out.print(worldFirst[i][j]); } System.out.println(); }
+		 */
+		worldFirst[8][5]=1;
+		worldFirst[9][10]=0;
+		worldFirst[5][15]=1;
+		worldFirst[3][10]=1;
 		worlds.add(worldFirst);
 
 		return worlds;
@@ -154,12 +141,12 @@ public class Game {
 		frame.getContentPane().removeAll();
 		frame.repaint();
 
-		GridLayout grid = new GridLayout(10, 20);
+		GridLayout grid = new GridLayout(height, width);
 		frame.setLayout(grid);
 
-		JLabel arrayOfLabels[][] = new JLabel[10][20];
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 20; j++) {
+		JLabel arrayOfLabels[][] = new JLabel[height][width];
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
 				arrayOfLabels[i][j] = new JLabel();
 				frame.add(arrayOfLabels[i][j]);
 
@@ -172,5 +159,24 @@ public class Game {
 		frame.setVisible(true);
 
 		return arrayOfLabels;
+	}
+
+	public void nextWorld() {
+		if (this.worlds.size() > worldId+1) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			fillBoard(board, worlds.get(++worldId));
+			c.newWorld(worlds.get(worldId));
+		} else
+			try {
+				throw new Exception("brak swiata");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} // brak kolejnego swiata
 	}
 }

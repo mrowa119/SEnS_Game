@@ -47,9 +47,9 @@ public class Menu implements ActionListener {
 		frame.repaint();
 		
 		//przyciski
-		startB = new JButton("nowa gra");
-		aboutB = new JButton("o programie");
-		quitB = new JButton("wyjúcie");
+		startB = new JButton("Nowa gra");
+		aboutB = new JButton("O programie");
+		quitB = new JButton("Wyjúcie");
 		
 		// wyglƒÖd przycisk√≥w
 		startB.setBorderPainted(false);
@@ -74,9 +74,9 @@ public class Menu implements ActionListener {
 			
 		//umiejscowienie
 		
-		startB.setBounds(300, 100, 200, 80);
-		aboutB.setBounds(300, 200, 200, 80);
-		quitB.setBounds(300, 300, 200, 80);
+		startB.setBounds(290, 100, 210, 80);
+		aboutB.setBounds(290, 200, 210, 80);
+		quitB.setBounds(290, 300, 210, 80);
 		
 		// dodawanie sponsor√≥w
 		BufferedImage infusion = null;
@@ -119,8 +119,7 @@ public class Menu implements ActionListener {
 		
 		if(e.getSource() == startB){
 			
-			Game g = new Game(frame, this);
-			g.start();
+			new Game(frame, this);
 			
 		}
 		else if(e.getSource() == aboutB){
@@ -130,6 +129,7 @@ public class Menu implements ActionListener {
 		}
 		else{
 			frame.dispose();
+			Runtime.getRuntime().exit(0);
 		}
 		
 	}

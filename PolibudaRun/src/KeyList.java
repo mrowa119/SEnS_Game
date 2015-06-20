@@ -1,21 +1,27 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JFrame;
+
 public class KeyList implements KeyListener, Runnable{
 	private Character c;
-	private HorizontalMove hm;
+	private JumpMove hm;
 	boolean hmBlock;
 	private boolean isLeftPressed;
 	private boolean isRigthPressed;
+	private JFrame frame;
+	private Menu menu;
 
 	public KeyList() {
 
 	}
 
-	public KeyList(Character c) {
+	public KeyList(Character c, JFrame frame, Menu menu) {
 		this.c = c;
-		hm = new HorizontalMove(c, this);
+		hm = new JumpMove(c, this, 4);
 		hmBlock = false;
+		this.frame=frame;
+		this.menu=menu;
 	}
 
 	@Override
@@ -30,6 +36,12 @@ public class KeyList implements KeyListener, Runnable{
 					hmBlock = true;
 					new Thread(hm).start();
 				}
+				break;
+			}
+			case KeyEvent.VK_ESCAPE:{
+				frame.setLayout(null);
+				menu.createInterface(frame); 
+				frame.removeKeyListener(this);
 				break;
 			}
 			case KeyEvent.VK_LEFT: isLeftPressed = true; break;
