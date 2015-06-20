@@ -22,6 +22,8 @@ public class Menu implements ActionListener {
 	private JButton startB;
 	private JButton aboutB;
 	private JButton quitB;
+	private JButton scoreB;
+
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -53,36 +55,44 @@ public class Menu implements ActionListener {
 		startB = new JButton("nowa gra");
 		aboutB = new JButton("o programie");
 		quitB = new JButton("wyj�cie");
+		scoreB = new JButton("wyniki");
+
 		
 		// wygląd przycisków
 		startB.setBorderPainted(false);
 		startB.setFocusPainted(false);
 		startB.setBackground(new Color(46, 204, 113));
-		startB.setBounds(0, 0, 150, 50);
 		startB.setFont(new Font(Font.SANS_SERIF, 2, 30));
 		
 		aboutB.setBorderPainted(false);
 		aboutB.setFocusPainted(false);
 		aboutB.setBackground(new Color(65, 131, 215));
-		aboutB.setBounds(0, 0, 150, 50);
 		aboutB.setFont(new Font(Font.SANS_SERIF, 2, 30));
 		
 		quitB.setBorderPainted(false);
 		quitB.setFocusPainted(false);
 		quitB.setBackground(new Color(210, 77, 87));
-		quitB.setBounds(0, 0, 150, 50);
 		quitB.setFont(new Font(Font.SANS_SERIF, 2, 30));
+		
+		scoreB.setBorderPainted(false);
+		scoreB.setFocusPainted(false);
+		scoreB.setBackground(new Color(249, 255, 54));
+		scoreB.setFont(new Font(Font.SANS_SERIF, 2, 30));
 		
 		//obsluga zdarzen
 		startB.addActionListener(this);
 		aboutB.addActionListener(this);
 		quitB.addActionListener(this);
+		scoreB.addActionListener(this);
+
 			
 		//umiejscowienie
 		
-		startB.setBounds(300, 100, 200, 80);
-		aboutB.setBounds(300, 200, 200, 80);
-		quitB.setBounds(300, 300, 200, 80);
+		startB.setBounds(300, 50, 200, 80);
+		aboutB.setBounds(300, 150, 200, 80);
+		scoreB.setBounds(300, 250, 200, 80);
+		quitB.setBounds(300, 350, 200, 80);
+
 		
 		// dodawanie sponsorów
 		BufferedImage infusion = null;
@@ -112,6 +122,7 @@ public class Menu implements ActionListener {
 		frame.add(startB);
 		frame.add(aboutB);
 		frame.add(quitB);
+		frame.add(scoreB);
 		frame.add(jl_infusion);
 		frame.add(jl_primagia);
 		frame.add(jl_sens);
@@ -133,6 +144,11 @@ public class Menu implements ActionListener {
 			
 			About a = new About();
 			a.createInterface(frame, this);
+		}
+		else if(e.getSource() == scoreB)
+		{
+			Scored s = new Scored();
+			s.createInterface(frame, this);
 		}
 		else{
 			frame.dispose();
