@@ -18,17 +18,20 @@ public class Game {
 	public Game(JFrame frame, Menu menu) {
 
 		loadTestWorlds();
-		Character character = new Character(width, height);
 		worlds = loadTestWorlds();
 		board = makeLabels(frame);
 		fillBoard(board, worlds.get(0));
+		worldId = 0;
+		c = new Character(0, height - 2, worlds.get(0), board);
+		frame.addKeyListener(new KeyList(c));
+		frame.requestFocusInWindow();
 	}
 
 	public void start() {
-
+		c.print(board);
 	}
 
-	public void setValue(JLabel label, int value) {
+	public static void setValue(JLabel label, int value) {
 		switch (value) {
 		case 0: {
 			label.setText("N");
@@ -38,24 +41,28 @@ public class Game {
 			label.setText("Z");
 			break;
 		}
+		case 3: {
+			label.setText("X");
+			break;
+		}
 		}
 	}
 
 	public void fillBoard(JLabel[][] board, int[][] world) {
 
-		for(int i = 0; i < height; i++){
-			for(int j = 0; j < width; j ++){
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
 				setValue(board[i][j], world[i][j]);
 			}
 		}
-		
+
 	}
 
 	// czy pole aktualny swiat czy jest ostatnie to error koniec swiata
 	// jesli nie to wczytaj ten swiat metodá fillworld throw exception opis 1
 	// zdanie
 
-	public void CzyJestNastepnySwiat(JLabel[][] etykieta, int[][] world,
+	public void isNextWorld(JLabel[][] etykieta, int[][] world,
 			Character character) {
 		if (this.worlds.size() == worldId) {
 			try {
@@ -69,8 +76,8 @@ public class Game {
 		worldId++;
 	}
 
-	public List<int[][]> loadTestWorlds(){
-	
+	public List<int[][]> loadTestWorlds() {
+
 		worlds = new ArrayList<int[][]>();
 		int[][] worldFirst = new int[10][20];
 
@@ -82,12 +89,12 @@ public class Game {
 		for (int i = 0; i < 20; i++) {
 			worldFirst[9][i] = 1;
 		}
-		for (int i = 0; i < 10; i++) {
+/*		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 20; j++) {
 				System.out.print(worldFirst[i][j]);
 			}
 			System.out.println();
-		}
+		}*/
 		worlds.add(worldFirst);
 
 		return worlds;
