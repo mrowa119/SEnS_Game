@@ -16,29 +16,37 @@ public class Character {
 	}
 
 	public void up() {
-		remove(board, world);
-		this.x -= 1;
-		print(board);
-	}
-
-	public void down() {
-		remove(board, world);
-		this.x += 1;
-		print(board);
-	}
-
-	public void left() {
-		if (y > 0) {
+		synchronized (board) {
 			remove(board, world);
-			this.y -= 1;
+			this.x -= 1;
 			print(board);
 		}
 	}
 
+	public void down() {
+		synchronized (board) {
+			remove(board, world);
+			this.x += 1;
+			print(board);
+		}
+	}
+
+	public void left() {
+		if (y > 0) {
+			synchronized (board) {
+				remove(board, world);
+				this.y -= 1;
+				print(board);
+			}
+		}
+	}
+
 	public void rigth() {
-		remove(board, world);
-		this.y += 1;
-		print(board);
+		synchronized (board) {
+			remove(board, world);
+			this.y += 1;
+			print(board);
+		}
 	}
 
 	public void print(JLabel[][] board) {

@@ -22,7 +22,8 @@ public class KeyList implements KeyListener {
 		int c = e.getKeyCode();
 		if (!(this.c == null)) {
 			switch (c) {
-			case KeyEvent.VK_UP: {
+			case KeyEvent.VK_UP: 
+			case KeyEvent.VK_SPACE: {
 				if (!hmBlock) {
 					hmBlock = true;
 					new Thread(hm).start();
