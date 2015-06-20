@@ -13,29 +13,15 @@ public class Game {
 	private final static int height = 10;
 	private List<int[][]> worlds;
 	private int worldId;
-	
-/*	public static void main(String args[]) {
-		Game g = new Game();
-		g.loadTestWorlds();
-		
-		JFrame frame = new JFrame();
-		frame.setSize(800, 600);
-		frame.setVisible(true);
-		
-		g.makeLabels(frame);
-		
-	}*/
+	private JLabel[][] board;
 
-	public Game() {
-		loadTestWorlds();
-		Character character = new Character(width, height);
-		
-	}
 	public Game(JFrame frame, Menu menu){
 		
 		loadTestWorlds();
 		Character character = new Character(width, height);
-		makeLabels(frame);
+		worlds = loadTestWorlds();
+		board = makeLabels(frame);
+		fillBoard(board, worlds.get(0), character);
 	}
 
 	public void start() {
@@ -63,7 +49,7 @@ public class Game {
 		fillBoard(etykieta, world, character);
 		worldId++;
 	}
-	public void loadTestWorlds(){
+	public List loadTestWorlds(){
 		
 		worlds = new ArrayList<int[][]>();
 		int[][] worldFirst = new int[10][20];
@@ -82,8 +68,11 @@ public class Game {
 			}
 			System.out.println();
 		}
+		worlds.add(worldFirst);
+		
+		return worlds;
 	}
-	public void makeLabels(JFrame frame){
+	public JLabel[][] makeLabels(JFrame frame){
 		
 //		//pobieranie z frame wymiarow
 //		int frameHeight = frame.getHeight();
@@ -113,5 +102,7 @@ public class Game {
 		//dopisane, aby elementy pokazywaly sie porawnie bez potrzeby zmiany rozmiaru 
 		frame.setSize(800, 600);
 		frame.setVisible(true);
+		
+		return arrayOfLabels;
 	}
 }
