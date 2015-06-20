@@ -50,7 +50,7 @@ public class Menu implements ActionListener {
 		//przyciski
 		startB = new JButton("nowa gra");
 		aboutB = new JButton("o programie");
-		quitB = new JButton("wyjście");
+		quitB = new JButton("wyj�cie");
 		
 		// wygląd przycisków
 		startB.setBorderPainted(false);
@@ -87,9 +87,9 @@ public class Menu implements ActionListener {
 		BufferedImage primagia = null;
 		BufferedImage sens = null;
 		try {
-			infusion = ImageIO.read(new File("loga/infusion.png"));
-			primagia = ImageIO.read(new File("loga/primagia.png"));
-			sens = ImageIO.read(new File("loga/sens.png"));
+			infusion = ImageIO.read(new File("../loga/infusion.png"));
+			primagia = ImageIO.read(new File("../loga/primagia.png"));
+			sens = ImageIO.read(new File("../loga/sens.png"));
 		} catch (Exception ex) {
 			System.out.println("nic");
 		}

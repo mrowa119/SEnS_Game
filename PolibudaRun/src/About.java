@@ -44,8 +44,8 @@ public class About implements ActionListener {
 		
 		// tworzenie pola tekstowego
 		String tekst = 
-				"Ta oto\n politechnczna gierka\npowsta≈Ça w ramach projektu\n\"Juwenaliowe Coding Dojo\"\norganizowanego"
-				+ "przez ko≈Ço nauowe\n\"SEnS\"";
+				"Ta oto\n politechnczna gierka\npowsta≥a w ramach projektu\n\"Juwenaliowe Coding Dojo\"\norganizowanego"
+				+ "przez ko≥o nauowe\n\"SEnS\"";
 		
 		StyledDocument document = new DefaultStyledDocument();
 		Style defaultStyle = document.getStyle(StyleContext.DEFAULT_STYLE);
@@ -63,9 +63,9 @@ public class About implements ActionListener {
 		BufferedImage primagia = null;
 		BufferedImage sens = null;
 		try {
-			infusion = ImageIO.read(new File("loga/infusion.png"));
-			primagia = ImageIO.read(new File("loga/primagia.png"));
-			sens = ImageIO.read(new File("loga/sens.png"));
+			infusion = ImageIO.read(new File("../loga/infusion.png"));
+			primagia = ImageIO.read(new File("../loga/primagia.png"));
+			sens = ImageIO.read(new File("../loga/sens.png"));
 		} catch (Exception ex) {
 			System.out.println("nic");
 		}
