@@ -39,7 +39,7 @@ public class Menu implements ActionListener {
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(new Color(174, 168, 211));
 		
-					frame.addKeyListener(new KeyList(new Character(5, 5)));
+		frame.addKeyListener(new KeyList(new Character(5, 5)));
 		
 		return frame;
 	}

@@ -32,6 +32,7 @@ public class KeyList implements KeyListener {
 			this.c.rigth();
 			break;
 		}
+		System.out.println(this.c);
 	}
 
 	@Override
