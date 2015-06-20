@@ -10,14 +10,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import org.imgscalr.Scalr;
 
 
 public class Menu implements ActionListener {
 	
-	private final static int frameX=20, frameY=10;
+	//private final static int frameX=20, frameY=10;
 	private JFrame frame;
 	private JButton startB;
 	private JButton aboutB;
@@ -38,8 +37,6 @@ public class Menu implements ActionListener {
 		frame.setLayout(null);
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(new Color(174, 168, 211));
-		
-		frame.addKeyListener(new KeyList(new Character(5, 5)));
 		
 		return frame;
 	}

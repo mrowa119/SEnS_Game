@@ -30,7 +30,7 @@ public class HorizontalMove implements Runnable  {
 		for(int i=0;i<maxJumpHeigth;i++){
 			c.down();
 			try {
-				Thread.sleep(200);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -51,7 +51,7 @@ public class HorizontalMove implements Runnable  {
 		for(int i=0;i<maxJumpHeigth;i++){
 			c.up();
 			try {
-				Thread.sleep(200);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

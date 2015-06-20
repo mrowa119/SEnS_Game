@@ -1,27 +1,54 @@
+import java.awt.Paint;
+import java.awt.print.Printable;
+
+import javax.swing.JLabel;
+
 public class Character {
 	private int x;
 	private int y;
+	private int[][] world;
+	private JLabel[][] board;
 
 	
-	public Character(int x, int y) {
+	public Character(int y, int x, int[][] world, JLabel[][] board) {
 		this.x = x;
 		this.y = y;
+		this.world=world;
+		this.board=board;
+		System.out.println(board);
 	}
 
 	public void up() {
-		this.y += 1;
+		remove(board, world);
+		this.x -= 1;
+		print(board);
 	}
 
 	public void down() {
-		this.y -= 1;
+		remove(board, world);
+		this.x += 1;
+		print(board);
 	}
 
 	public void left() {
-		this.x -= 1;
+		remove(board, world);
+		this.y -= 1;
+		print(board);
 	}
 
 	public void rigth() {
-		this.x += 1;
+		remove(board, world);
+		this.y += 1;
+		print(board);
+	}
+	
+	public void print(JLabel[][] board){
+		System.out.println(this);
+		Game.setValue(board[x][y], 3);
+	}
+	
+	public void remove(JLabel[][] board, int[][] world){
+		Game.setValue(board[x][y], world[x][y]);
 	}
 
 	@Override
