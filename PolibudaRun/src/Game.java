@@ -4,11 +4,15 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -48,8 +52,8 @@ public class Game {
 	public Game(JFrame frame, Menu menu) {
 
 		loadTestWorlds();
-		// worlds = loadTestWorlds();
-		worlds = loadWorlds();
+		worlds = loadTestWorlds();
+		// worlds = loadWorlds();
 		board = makeLabels(frame);
 		fillBoard(board, worlds.get(0));
 		worldId = 0;
@@ -146,7 +150,6 @@ public class Game {
 		worldFirst[3][10] = 1;
 		worldFirst[6][3] = 2;
 		worlds.add(worldFirst);
-		worlds.add(worldFirst);
 
 		return worlds;
 	}
@@ -197,8 +200,13 @@ public class Game {
 			fillBoard(board, worlds.get(++worldId));
 			c.newWorld(worlds.get(worldId));
 		} else {
-			JOptionPane.showMessageDialog(null, "Wygra³eœ!!! koniec map!!!"
-					+ ((System.nanoTime() - time) / 1000000000));
+
+			long timm = ((System.nanoTime() - time) / 1000000000);
+			String name = JOptionPane.showInputDialog("Brawo osi¹gn¹³eœ czas "
+					+ timm + "s. Podaj swoje imie na listê wyników");
+			if ((!(name == null)) && (!(name.equals("")))) {
+				save(name, timm);
+			}
 			c.reset();
 			Robot r;
 			try {
@@ -216,6 +224,58 @@ public class Game {
 			// e.printStackTrace();
 			// } // brak kolejnego swiata
 		}
+	}
+
+	private void save(String name, long timeToSave) {
+		
+		// TODO Auto-generated method stub
+		List<Record> list = loadSave();
+		list.add(new Record(name, timeToSave));
+		Collections.sort(list, new Comparator<Record>() {
+	        @Override
+	        public int compare(Record  r1, Record  r2)
+	        {
+	            return  (r1.getTime() > r2.getTime())?1:-1;
+	        }
+	    });
+		saveList(list);
+	}
+
+	private void saveList(List<Record> list) {
+		BufferedWriter bw = null;
+			try {
+				bw = new BufferedWriter(new FileWriter("../save.txt"));
+				for(int i=0;i<list.size();i++){
+					bw.write(list.get(i).toString());
+					bw.newLine();
+				}
+				bw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+
+	private List<Record> loadSave() {
+		List<Record> list = new ArrayList<Record>();
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader("../save.txt"));
+			String tmp = br.readLine();
+			while(tmp!=null){
+				String[] table = tmp.split(" ");
+				list.add(new Record(table[0],Integer.parseInt(table[1])));
+				tmp = br.readLine();
+			}
+			br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	public List<int[][]> loadWorlds() {
