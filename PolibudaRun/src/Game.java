@@ -52,8 +52,8 @@ public class Game {
 	public Game(JFrame frame, Menu menu) {
 
 		loadTestWorlds();
-		worlds = loadTestWorlds();
-		// worlds = loadWorlds();
+		//worlds = loadTestWorlds();
+		worlds = loadWorlds();
 		board = makeLabels(frame);
 		fillBoard(board, worlds.get(0));
 		worldId = 0;

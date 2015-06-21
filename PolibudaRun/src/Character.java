@@ -13,6 +13,7 @@ public class Character {
 	private JLabel[][] board;
 	private Game game;
 	public boolean isUpMove = false;
+	private boolean isLive = true;
 
 	public Character(int y, int x, int[][] world, JLabel[][] board, Game game) {
 		this.x = x;
@@ -21,12 +22,11 @@ public class Character {
 		this.board = board;
 		this.game = game;
 	}
-	
-	public void reset(){
+
+	public void reset() {
 		x = world.length - 2;
 		y = 0;
 	}
-	
 
 	public void up() {
 		synchronized (board) {
@@ -42,11 +42,14 @@ public class Character {
 	public void down() throws Exception {
 		synchronized (board) {
 			if (x >= world.length - 1) {
-				JOptionPane.showMessageDialog(null, "Przegra³eœ !!!");
-				Robot r = new Robot();
-				r.keyPress(KeyEvent.VK_ESCAPE);
-				
-				throw new Exception("Dead");
+				if (isLive) {
+					isLive = false;
+					JOptionPane.showMessageDialog(null, "Przegra³eœ !!!");
+					Robot r = new Robot();
+					r.keyPress(KeyEvent.VK_ESCAPE);
+
+					throw new Exception("Dead");
+				}
 			} else if (world[x + 1][y] == 0) {
 				remove(board, world);
 				this.x += 1;
@@ -59,7 +62,7 @@ public class Character {
 	public void left() {
 		synchronized (board) {
 			if (y > 0)
-				if ((world[x][y - 1] == 0) || (world[x][y - 1] == 2) ) {
+				if ((world[x][y - 1] == 0) || (world[x][y - 1] == 2)) {
 
 					remove(board, world);
 					this.y -= 1;
