@@ -21,11 +21,13 @@ public class Menu implements ActionListener {
 	private JButton startB;
 	private JButton aboutB;
 	private JButton quitB;
+
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Menu m = new Menu();
 		m.createInterface(m.createFrame(800, 600));
+		
 	}
 	
 	public JFrame createFrame(int width,int height){

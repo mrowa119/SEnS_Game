@@ -3,7 +3,10 @@ import java.awt.GridLayout;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +23,8 @@ import org.imgscalr.Scalr;
 public class Game {
 	// public Game(JFrame frame, Menu menu) {
 
-	private final static int width = 20;
-	private final static int height = 10;
+	private static int width = 20;
+	private static int height = 10;
 	private List<int[][]> worlds;
 	private int worldId;
 	private JLabel[][] board;
@@ -29,6 +32,7 @@ public class Game {
 	private static BufferedImage down = null;
 	private static BufferedImage ufo = null;
 	private static BufferedImage rope = null;
+	private long time;
 
 	static {
 		try {
@@ -44,7 +48,8 @@ public class Game {
 	public Game(JFrame frame, Menu menu) {
 
 		loadTestWorlds();
-		worlds = loadTestWorlds();
+		// worlds = loadTestWorlds();
+		worlds = loadWorlds();
 		board = makeLabels(frame);
 		fillBoard(board, worlds.get(0));
 		worldId = 0;
@@ -54,6 +59,7 @@ public class Game {
 		frame.addKeyListener(kl);
 		frame.requestFocusInWindow();
 		c.print(board);
+		time = System.nanoTime();
 	}
 
 	public static void setValue(JLabel label, int value) {
@@ -89,7 +95,7 @@ public class Game {
 		label.setIcon(new ImageIcon(Scalr.resize(down, label.getHeight(),
 				label.getWidth())));
 	}
-	
+
 	private static void setRope(JLabel label) {
 		// TODO Auto-generated method stub
 		label.setVerticalAlignment(SwingConstants.TOP);
@@ -191,7 +197,8 @@ public class Game {
 			fillBoard(board, worlds.get(++worldId));
 			c.newWorld(worlds.get(worldId));
 		} else {
-			JOptionPane.showMessageDialog(null, "Wygra³eœ!!! koniec map!!!");
+			JOptionPane.showMessageDialog(null, "Wygra³eœ!!! koniec map!!!"
+					+ ((System.nanoTime() - time) / 1000000000));
 			c.reset();
 			Robot r;
 			try {
@@ -201,7 +208,7 @@ public class Game {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			// try {
 			// throw new Exception("brak swiata");
 			// } catch (Exception e) {
@@ -209,5 +216,40 @@ public class Game {
 			// e.printStackTrace();
 			// } // brak kolejnego swiata
 		}
+	}
+
+	public List<int[][]> loadWorlds() {
+		List<int[][]> result = new ArrayList<int[][]>();
+		BufferedReader br = null;
+		int[][] tmp;
+		try {
+			br = new BufferedReader(new FileReader("../worlds.txt"));
+			String dim = br.readLine();
+			String[] dime = dim.split(" ");
+			height = Integer.parseInt(dime[1]);
+			width = Integer.parseInt(dime[0]);
+			int max = Integer.parseInt(br.readLine());
+			for (int i = 0; i < max; i++) {
+				tmp = new int[height][width];
+				for (int m = 0; m < height; m++) {
+					String tempLIne = br.readLine();
+					String[] tempLineTable = tempLIne.split(" ");
+					for (int n = 0; n < tempLineTable.length; n++) {
+						tmp[m][n] = Integer.parseInt(tempLineTable[n]);
+					}
+				}
+				result.add(tmp);
+			}
+
+			br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 }
